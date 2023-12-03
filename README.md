@@ -1,5 +1,9 @@
 # Shopper
 
+This is the theoretical part of HW3, System Design course
+
+P. S. Didn't have time for practical, sorry
+
 ## Architecture
 
 ### Schema
