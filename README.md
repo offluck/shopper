@@ -23,24 +23,152 @@ This is an API description. Source file can be found in `./{service-name}/api` f
 
 ### HTTP
 
-- **HTTP-GateWay**:
-  - */api/v1/registration*
-  - */api/v1/login*
+      - Status code 200 (OK)
+      - Status code 201 (Created)
+      - Status code 204 (No Content)
+      - Status code 400 (Bad Request)
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 404 (Not Found)
+      - Status code 500 (Internal Server Error)
+
+- ***Auth-HTTP-GateWay***:
+  - **POST /api/v1/registration**
+    - *Request*:
+      - Body:
+        ```json
+        {
+          "login": "<login>",
+          "password": "<password>",
+          "first_name": "<first_name>",
+          "last_name": "<last_name>",
+          "email": "<email>",
+          "phone_number": "<phone_number>"
+        }
+        ```
+    - *Response*:
+      - Status code 201 (Created):
+        ```json
+        {
+          "token": "<token>"
+        }
+        ```
+      - Status code 400 (Bad Request)
+      - Status code 500 (Internal Server Error)
+  - **POST /api/v1/login**
+    - *Request*:
+      - Body:
+        ```json
+        {
+          "login": "<login>",
+          "password": "<password>"
+        }
+        ```
+    - *Response*:
+      - Status code 200 (OK):
+        - Body:
+          ```json
+          {
+            "token": "<token>"
+          }
+          ```
+      - Status code 400 (Bad Request)
+      - Status code 500 (Internal Server Error)
+
+- ***CheckOut-HTTP-GateWay***:
+  - **GET /api/v1/{user_id}/cart/items**
+    - *Request*:
+      - Headers:
+        - `"Authorization": "Bearer <token>"`
+    - *Response*:
+  - **PATCH /api/v1/{user_id}/cart/items**
+    - *Request*:
+      - Headers:
+        - `"Authorization": "Bearer <token>"`
+      - Body:
+        ```json
+        {
+          "": "<>"
+        }
+        ```
+    - *Response*:
+  - **DELETE /api/v1/{user_id}/cart/items**
+    - *Request*:
+      - Headers:
+        - `"Authorization": "Bearer <token>"`
+      - Body:
+        ```json
+        {
+          "": "<>"
+        }
+        ```
+    - *Response*:
+  - **POST /api/v1/{user_id}/cart/order**
+    - *Request*:
+      - Headers:
+        - `"Authorization": "Bearer <token>"`
+      - Body:
+        ```json
+        {
+          "": "<>"
+        }
+        ```
+    - *Response*:
+
+- ***OMS-HTTP-GateWay***:
+  - **GET /api/v1/{user_id}/orders/{order_id}**
+    - *Request*:
+      - Headers:
+        - `"Authorization": "Bearer <token>"`
+    - *Response*:
+  - **DELETE /api/v1/{user_id}/orders/{order_id}**
+    - *Request*:
+      - Headers:
+        - `"Authorization": "Bearer <token>"`
+    - *Response*:
+  - **POST /api/v1/{user_id}/orders/{order_id}/pay**
+    - *Request*:
+      - Headers:
+        - `"Authorization": "Bearer <token>"`
+      - Body:
+        ```json
+        {
+          "": "<>"
+        }
+        ```
+    - *Response*:
+
+- ***Billing-HTTP-GateWay***:
+  - **GET /api/v1/{user_id}/balance**
+    - *Request*:
+      - Headers:
+        - `"Authorization": "Bearer <token>"`
+    - *Response*:
+  - **POST /api/v1/{user_id}/balance/top-up**
+    - *Request*:
+      - Headers:
+        - `"Authorization": "Bearer <token>"`
+      - Body:
+        ```json
+        {
+          "": "<>"
+        }
+        ```
+    - *Response*:
+  - **POST /api/v1/{user_id}/balance/withdraw**
+    - *Request*:
+      - Headers:
+        - `"Authorization": "Bearer <token>"`
+      - Body:
+        ```json
+        {
+          "": "<>"
+        }
+        ```
+    - *Response*:
+
 
 ### gRPC
-
-      - Status code 0 (OK)
-        - Token: string
-      - Status code 1 (CANCELLED)
-      - Status code 2 (UNKOWN)
-      - Status code 3 (INVALID_ARGUMENT)
-      - Status code 4 (DEADLINE_EXCEEDED)
-      - Status code 5 (NOT_FOUND)
-      - Status code 6 (ALREADY_EXISTS)
-      - Status code 7 (PERMISSION_DENIED)
-      - Status code 9 (FAILED_PRECONDITION)
-      - Status code 13 (INTERNAL)
-      - Status code 14 (UNAVAILABLE)
 
 - ***Auth***:
   - **Register**: Registration of a new user

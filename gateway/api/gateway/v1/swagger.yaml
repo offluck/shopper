@@ -1,0 +1,23 @@
+openapi: "3.0.0"
+info:
+  version: 0.1.0
+  title: HTTP-GateWay
+paths:
+  /api/v1/registration:
+    post:
+      operationId: registration
+      summary: Registrate a new user
+      tags:
+        - auth
+      responses:
+        '201':
+          description: Token
+  /api/v1/login:
+    post:
+      operationId: registration
+      summary: Registrate a new user
+      tags:
+        - auth
+      responses:
+        '200':
+          description: Token
