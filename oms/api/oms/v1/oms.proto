@@ -9,8 +9,8 @@ import "validate/validate.proto";
 option go_package = "github.com/offluck/shopper/oms/pkg/oms_v1";
 
 service OMS {
-  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse) {}
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse) {}
   rpc ListOrder(ListOrderRequest) returns (ListOrderResponse) {}
   rpc PayOrder(PayOrderRequest) returns (PayOrderResponse) {}
 }

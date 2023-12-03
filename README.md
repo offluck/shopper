@@ -37,6 +37,7 @@ This is an API description. Source file can be found in `./{service-name}/api` f
       - Status code 4 (DEADLINE_EXCEEDED)
       - Status code 5 (NOT_FOUND)
       - Status code 6 (ALREADY_EXISTS)
+      - Status code 7 (PERMISSION_DENIED)
       - Status code 9 (FAILED_PRECONDITION)
       - Status code 13 (INTERNAL)
       - Status code 14 (UNAVAILABLE)
@@ -87,6 +88,7 @@ This is an API description. Source file can be found in `./{service-name}/api` f
       - Status code 3 (INVALID_ARGUMENT)
       - Status code 4 (DEADLINE_EXCEEDED)
       - Status code 5 (NOT_FOUND)
+      - Status code 7 (PERMISSION_DENIED)
       - Status code 13 (INTERNAL)
       - Status code 14 (UNAVAILABLE)
   - **DeleteFromCart**: Deletes product from cart
@@ -101,6 +103,7 @@ This is an API description. Source file can be found in `./{service-name}/api` f
       - Status code 3 (INVALID_ARGUMENT)
       - Status code 4 (DEADLINE_EXCEEDED)
       - Status code 5 (NOT_FOUND)
+      - Status code 7 (PERMISSION_DENIED)
       - Status code 9 (FAILED_PRECONDITION)
       - Status code 13 (INTERNAL)
       - Status code 14 (UNAVAILABLE)
@@ -119,24 +122,47 @@ This is an API description. Source file can be found in `./{service-name}/api` f
       - Status code 2 (UNKOWN)
       - Status code 3 (INVALID_ARGUMENT)
       - Status code 4 (DEADLINE_EXCEEDED)
+      - Status code 7 (PERMISSION_DENIED)
       - Status code 13 (INTERNAL)
       - Status code 14 (UNAVAILABLE)
   - **Order**: Sends order request
     - *Request*:
+      - UserID: uint64
     - *Responses*:
       - Status code 0 (OK)
-        - Token: string
+        - OrderID: uint64
       - Status code 1 (CANCELLED)
       - Status code 2 (UNKOWN)
       - Status code 3 (INVALID_ARGUMENT)
       - Status code 4 (DEADLINE_EXCEEDED)
-      - Status code 5 (NOT_FOUND)
-      - Status code 6 (ALREADY_EXISTS)
-      - Status code 9 (FAILED_PRECONDITION)
+      - Status code 7 (PERMISSION_DENIED)
       - Status code 13 (INTERNAL)
       - Status code 14 (UNAVAILABLE)
 
 - ***OMS***:
-
+  - **CreateOrder**:
+    - *Request*:
+    - *Responses*:
+  - **CancelOrder**:
+    - *Request*:
+    - *Responses*:
+  - **ListOrder**:
+    - *Request*:
+    - *Responses*:
+  - **PayOrder**:
+    - *Request*:
+    - *Responses*:
 
 - ***Billing***:
+  - **PayOrder**:
+    - *Request*:
+    - *Responses*:
+  - **GetBalance**:
+    - *Request*:
+    - *Responses*:
+  - **TopUpAccount**:
+    - *Request*:
+    - *Responses*:
+  - **WithdrawMoney**:
+    - *Request*:
+    - *Responses*:
