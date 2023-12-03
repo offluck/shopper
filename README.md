@@ -21,18 +21,9 @@ Product services:
 
 This is an API description. Source file can be found in `./{service-name}/api` folder
 
-P. S. I hadn't time to finish `swagger.yaml`, sorry, but all the `.proto`'s are ready
+P. S. I hadn't time to finish `swagger.yaml`, sorry, however all the `*.proto`'s are ready
 
 ### HTTP
-
-      - Status code 200 (OK)
-      - Status code 201 (Created)
-      - Status code 204 (No Content)
-      - Status code 400 (Bad Request)
-      - Status code 401 (Unauthorized)
-      - Status code 403 (Forbidden)
-      - Status code 404 (Not Found)
-      - Status code 500 (Internal Server Error)
 
 - ***Auth-HTTP-GateWay***:
   - **POST /api/v1/registration**
