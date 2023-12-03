@@ -10,19 +10,31 @@ service Auth {
 }
 
 message RegisterRequest {
-  string username = 1;
-  string password = 2;
+  string username = 1
+    [json_name = "username", (validate.rules).string = {min_len: 4}];
+  string password = 2
+    [json_name = "password", (validate.rules).string = {min_len: 8}];
+  string first_name = 2
+    [json_name = "first_name", (validate.rules).string = {min_len: 2}];
+  string last_name = 2
+    [json_name = "last_name", (validate.rules).string = {min_len: 2}];
+  string email = 2
+    [json_name = "email", (validate.rules).string = {min_len: 5}];
+  string phone_number = 2
+    [json_name = "phone_number", (validate.rules).string = {min_len: 1}];
 }
 
 message RegisterResponse {
-  string token = 1;
+  string token = 1 [json_name = "token"];
 }
 
 message GetTokenRequest {
-  string username = 1;
-  string password = 2;
+  string username = 1
+    [json_name = "username", (validate.rules).string = {min_len: 4}];
+  string password = 2
+    [json_name = "password", (validate.rules).string = {min_len: 8}];
 }
 
 message GetTokenResponse {
-  string token = 1;
+  string token = 1 [json_name = "token"];
 }

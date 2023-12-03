@@ -13,6 +13,7 @@ service Billing {
 
 message PayOrderRequest {
   uint64 order_id = 1;
+  uint32 total_price = 2;
   uint64 user_id = 2
     [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
 }
