@@ -142,27 +142,133 @@ This is an API description. Source file can be found in `./{service-name}/api` f
 - ***OMS***:
   - **CreateOrder**:
     - *Request*:
+      - UserID: uint64
+      - []Items
+        - SKU: uint32
+        - Count: uint32
+      - TotalPrice: uint32
     - *Responses*:
+      - Status code 0 (OK)
+        - Token: string
+      - Status code 1 (CANCELLED)
+      - Status code 2 (UNKOWN)
+      - Status code 3 (INVALID_ARGUMENT)
+      - Status code 4 (DEADLINE_EXCEEDED)
+      - Status code 7 (PERMISSION_DENIED)
+      - Status code 13 (INTERNAL)
+      - Status code 14 (UNAVAILABLE)
   - **CancelOrder**:
     - *Request*:
+      - OrderID: uint64
     - *Responses*:
+      - Status code 0 (OK)
+      - Status code 1 (CANCELLED)
+      - Status code 2 (UNKOWN)
+      - Status code 4 (DEADLINE_EXCEEDED)
+      - Status code 5 (NOT_FOUND)
+      - Status code 7 (PERMISSION_DENIED)
+      - Status code 13 (INTERNAL)
+      - Status code 14 (UNAVAILABLE)
   - **ListOrder**:
     - *Request*:
+      - OrderID: uint64
     - *Responses*:
+      - Status code 0 (OK)
+        - Status:
+          - UNSPECIFIED
+          - NEW
+          - AWAITING_PAYMENT
+          - FAILED
+          - PAYED
+          - CANCELED
+        - UserID: uint64
+        - []Items
+          - SKU: uint32
+          - Count: uint32
+        - TotalPrice: uint32
+      - Status code 1 (CANCELLED)
+      - Status code 2 (UNKOWN)
+      - Status code 4 (DEADLINE_EXCEEDED)
+      - Status code 5 (NOT_FOUND)
+      - Status code 7 (PERMISSION_DENIED)
+      - Status code 13 (INTERNAL)
+      - Status code 14 (UNAVAILABLE)
   - **PayOrder**:
     - *Request*:
+      - OrderID: uint64
     - *Responses*:
+    - Status code 0 (OK)
+      - Status:
+        - UNSPECIFIED
+        - NEW
+        - AWAITING_PAYMENT
+        - FAILED
+        - PAYED
+        - CANCELED
+      - Status code 1 (CANCELLED)
+      - Status code 2 (UNKOWN)
+      - Status code 4 (DEADLINE_EXCEEDED)
+      - Status code 5 (NOT_FOUND)
+      - Status code 7 (PERMISSION_DENIED)
+      - Status code 13 (INTERNAL)
+      - Status code 14 (UNAVAILABLE)
 
 - ***Billing***:
   - **PayOrder**:
     - *Request*:
+      - OrderID: uint64
+      - TotalPrice: uint32
+      - UserID: uint64
     - *Responses*:
+      - Status code 0 (OK)
+      - Status code 1 (CANCELLED)
+      - Status code 2 (UNKOWN)
+      - Status code 4 (DEADLINE_EXCEEDED)
+      - Status code 7 (PERMISSION_DENIED)
+      - Status code 9 (FAILED_PRECONDITION)
+      - Status code 13 (INTERNAL)
+      - Status code 14 (UNAVAILABLE)
   - **GetBalance**:
     - *Request*:
+      - UserID: uint64
     - *Responses*:
+      - Status code 0 (OK)
+        - Balance: float64
+      - Status code 1 (CANCELLED)
+      - Status code 2 (UNKOWN)
+      - Status code 4 (DEADLINE_EXCEEDED)
+      - Status code 7 (PERMISSION_DENIED)
+      - Status code 13 (INTERNAL)
+      - Status code 14 (UNAVAILABLE)
   - **TopUpAccount**:
     - *Request*:
+      - UserID: uint64
+      - Amount: float64
     - *Responses*:
+      - Status code 0 (OK)
+        - NewBalance: float64
+      - Status code 1 (CANCELLED)
+      - Status code 2 (UNKOWN)
+      - Status code 3 (INVALID_ARGUMENT)
+      - Status code 4 (DEADLINE_EXCEEDED)
+      - Status code 5 (NOT_FOUND)
+      - Status code 6 (ALREADY_EXISTS)
+      - Status code 7 (PERMISSION_DENIED)
+      - Status code 13 (INTERNAL)
+      - Status code 14 (UNAVAILABLE)
   - **WithdrawMoney**:
     - *Request*:
+      - UserID: uint64
+      - Amount: float64
     - *Responses*:
+      - Status code 0 (OK)
+        - NewBalance: float64
+      - Status code 1 (CANCELLED)
+      - Status code 2 (UNKOWN)
+      - Status code 3 (INVALID_ARGUMENT)
+      - Status code 4 (DEADLINE_EXCEEDED)
+      - Status code 5 (NOT_FOUND)
+      - Status code 6 (ALREADY_EXISTS)
+      - Status code 7 (PERMISSION_DENIED)
+      - Status code 13 (INTERNAL)
+      - Status code 14 (UNAVAILABLE)

@@ -12,7 +12,8 @@ service Billing {
 }
 
 message PayOrderRequest {
-  uint64 order_id = 1;
+  uint64 order_id = 1
+    [json_name = "order_id", (validate.rules).int64 = {not_in: [0]}];
   uint32 total_price = 2;
   uint64 user_id = 2
     [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
@@ -33,19 +34,21 @@ message GetBalanceResponse {
 message TopUpAccountRequest {
   uint64 user_id = 1
     [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
-  double amount = 2;
+  double amount = 2 [json_name = "amount", (validate.rules).double = {gt: 0}];
 }
 
 message TopUpAccountResponse {
-  double new_balance = 1;
+  double new_balance = 1
+    [json_name = "new_balance", (validate.rules).double = {gt: 0}];
 }
 
 message WithdrawMoneyRequest {
   uint64 user_id = 1
     [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
-  double amount = 2;
+  double amount = 2 [json_name = "amount", (validate.rules).double = {gt: 0}];
 }
 
 message WithdrawMoneyResponse {
-  double new_balance = 1;
+  double new_balance = 1
+    [json_name = "new_balance", (validate.rules).double = {gt: 0}];
 }

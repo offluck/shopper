@@ -20,25 +20,29 @@ message Item {
   uint32 count = 2 [json_name = "count"];
 }
 
+message CreateOrderRequest {
+  uint64 user_id = 1
+    [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
+  repeated Item items = 2 [json_name = "items"];
+  uint32 total_price = 3;
+}
+
+message CreateOrderResponse {
+  uint64 order_id = 1
+    [json_name = "order_id", (validate.rules).int64 = {not_in: [0]}];
+}
+
 message CancelOrderRequest {
-  uint64 order_id = 1 [json_name = "order_id"];
+  uint64 order_id = 1
+    [json_name = "order_id", (validate.rules).int64 = {not_in: [0]}];
 }
 
 message CancelOrderResponse {
 }
 
-message CreateOrderRequest {
-  uint64 user_id = 1
-    [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
-  repeated Item items = 2 [json_name = "items"];
-}
-
-message CreateOrderResponse {
-  uint64 order_id = 1 [json_name = "order_id"];
-}
-
 message ListOrderRequest {
-  uint64 order_id = 1 [json_name = "order_id"];
+  uint64 order_id = 1
+    [json_name = "order_id", (validate.rules).int64 = {not_in: [0]}];
 }
 
 enum Status {
@@ -52,12 +56,15 @@ enum Status {
 
 message ListOrderResponse {
   Status status = 1 [json_name = "status"];
-  int64 user = 2 [json_name = "user", (validate.rules).int64 = {not_in: [0]}];
+  uint64 user_id = 2
+    [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
   repeated Item items = 3 [json_name = "items"];
+  uint32 total_price = 4;
 }
 
 message PayOrderRequest {
-  uint64 order_id = 1 [json_name = "order_id"];
+  uint64 order_id = 1
+    [json_name = "order_id", (validate.rules).int64 = {not_in: [0]}];
 }
 
 message PayOrderResponse {

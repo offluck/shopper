@@ -56,5 +56,6 @@ message OrderRequest {
 }
   
 message OrderResponse {
-  uint64 order_id = 1 [json_name = "orderID"];
+  uint64 order_id = 1
+    [json_name = "order_id", (validate.rules).int64 = {not_in: [0]}];
 }
