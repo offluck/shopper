@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package shopper.oms_v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/offluck/shopper/oms/pkg/oms_v1";
+
+service OMS {
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse) {}
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
+  rpc ListOrder(ListOrderRequest) returns (ListOrderResponse) {}
+  rpc PayOrder(PayOrderRequest) returns (PayOrderResponse) {}
+}
+
+message Item {
+  uint32 sku = 1 [json_name = "sku"];
+  uint32 count = 2 [json_name = "count"];
+}
+
+message CancelOrderRequest {
+  uint64 order_id = 1 [json_name = "order_id"];
+}
+
+message CancelOrderResponse {
+}
+
+message CreateOrderRequest {
+  uint64 user_id = 1
+    [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
+  repeated Item items = 2 [json_name = "items"];
+}
+
+message CreateOrderResponse {
+  uint64 order_id = 1 [json_name = "order_id"];
+}
+
+message ListOrderRequest {
+  uint64 order_id = 1 [json_name = "order_id"];
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_NEW = 1;
+  STATUS_AWAITING_PAYMENT = 2;
+  STATUS_FAILED = 3;
+  STATUS_PAYED = 4;
+  STATUS_CANCELED = 5;
+}
+
+message ListOrderResponse {
+  Status status = 1 [json_name = "status"];
+  int64 user = 2 [json_name = "user", (validate.rules).int64 = {not_in: [0]}];
+  repeated Item items = 3 [json_name = "items"];
+}
+
+message PayOrderRequest {
+  uint64 order_id = 1 [json_name = "order_id"];
+}
+
+message PayOrderResponse {
+  Status status = 1 [json_name = "status"];
+}

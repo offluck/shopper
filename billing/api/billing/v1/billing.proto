@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package shopper.billing_v1;
+
+option go_package = "github.com/offluck/shopper/billing/pkg/billing_v1";
+
+service Billing {
+  rpc PayOrder(PayOrderRequest) returns (PayOrderResponse) {}
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse) {}
+  rpc TopUpAccount(TopUpAccountRequest) returns (TopUpAccountResponse) {}
+  rpc WithdrawMoney(WithdrawMoneyRequest) returns (WithdrawMoneyResponse) {}
+}
+
+message PayOrderRequest {
+  uint64 order_id = 1;
+  uint64 user_id = 2
+    [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
+}
+
+message PayOrderResponse {
+}
+
+message GetBalanceRequest {
+  uint64 user_id = 1
+    [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
+}
+
+message GetBalanceResponse {
+  double balance = 1;
+}
+
+message TopUpAccountRequest {
+  uint64 user_id = 1
+    [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
+  double amount = 2;
+}
+
+message TopUpAccountResponse {
+  double new_balance = 1;
+}
+
+message WithdrawMoneyRequest {
+  uint64 user_id = 1
+    [json_name = "user_id", (validate.rules).int64 = {not_in: [0]}];
+  double amount = 2;
+}
+
+message WithdrawMoneyResponse {
+  double new_balance = 1;
+}

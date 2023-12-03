@@ -4,5 +4,6 @@ use (
     ./auth
     ./billing
     ./checkout
+    ./oms
     ./gateway
 )
