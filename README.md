@@ -21,6 +21,8 @@ Product services:
 
 This is an API description. Source file can be found in `./{service-name}/api` folder
 
+P. S. I hadn't time to finish `swagger.yaml`, sorry, but all the `.proto`'s are ready
+
 ### HTTP
 
       - Status code 200 (OK)
@@ -46,7 +48,7 @@ This is an API description. Source file can be found in `./{service-name}/api` f
           "phone_number": "<phone_number>"
         }
         ```
-    - *Response*:
+    - *Responses*:
       - Status code 201 (Created):
         ```json
         {
@@ -64,7 +66,7 @@ This is an API description. Source file can be found in `./{service-name}/api` f
           "password": "<password>"
         }
         ```
-    - *Response*:
+    - *Responses*:
       - Status code 200 (OK):
         - Body:
           ```json
@@ -80,7 +82,27 @@ This is an API description. Source file can be found in `./{service-name}/api` f
     - *Request*:
       - Headers:
         - `"Authorization": "Bearer <token>"`
-    - *Response*:
+    - *Responses*:
+      - Status code 200 (OK)
+        - Body:
+          ```json
+          {
+            "items": [
+              {
+                "sku": <sku>,
+                "count": <count>,
+                "name": "<name>",
+                "price": <price>,
+              },
+              ...
+            ]
+            "token": "<token>"
+          }
+          ```
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 404 (Not Found)
+      - Status code 500 (Internal Server Error)
   - **PATCH /api/v1/{user_id}/cart/items**
     - *Request*:
       - Headers:
@@ -88,10 +110,17 @@ This is an API description. Source file can be found in `./{service-name}/api` f
       - Body:
         ```json
         {
-          "": "<>"
+          "sku": <sku>,
+          "count": <count>
         }
         ```
-    - *Response*:
+    - *Responses*:
+      - Status code 200 (OK)
+      - Status code 400 (Bad Request)
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 404 (Not Found)
+      - Status code 500 (Internal Server Error)
   - **DELETE /api/v1/{user_id}/cart/items**
     - *Request*:
       - Headers:
@@ -99,51 +128,97 @@ This is an API description. Source file can be found in `./{service-name}/api` f
       - Body:
         ```json
         {
-          "": "<>"
+          "sku": <sku>,
+          "count": <count>
         }
         ```
-    - *Response*:
+    - *Responses*:
+      - Status code 204 (No Content)
+      - Status code 400 (Bad Request)
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 404 (Not Found)
+      - Status code 500 (Internal Server Error)
   - **POST /api/v1/{user_id}/cart/order**
     - *Request*:
       - Headers:
         - `"Authorization": "Bearer <token>"`
-      - Body:
-        ```json
-        {
-          "": "<>"
-        }
-        ```
-    - *Response*:
+    - *Responses*:
+      - Status code 201 (Created)
+        - Body:
+          ```json
+          {
+            "order_id": <order_id>
+          }
+          ```
+      - Status code 400 (Bad Request)
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 500 (Internal Server Error)
 
 - ***OMS-HTTP-GateWay***:
   - **GET /api/v1/{user_id}/orders/{order_id}**
     - *Request*:
       - Headers:
         - `"Authorization": "Bearer <token>"`
-    - *Response*:
+    - *Responses*:
+      - Status code 200 (OK)
+        - Body:
+          ```json
+          {
+            "status": "<status>",
+            "user_id": "user_id",
+            "items": [
+              {
+                "sku": <sku>,
+                "count": <count>
+              }
+            ],
+            "total_price": <total_price>
+          }
+          ```
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 404 (Not Found)
+      - Status code 500 (Internal Server Error)
   - **DELETE /api/v1/{user_id}/orders/{order_id}**
     - *Request*:
       - Headers:
         - `"Authorization": "Bearer <token>"`
-    - *Response*:
+    - *Responses*:
+      - Status code 204 (No Content)
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 404 (Not Found)
+      - Status code 500 (Internal Server Error)
   - **POST /api/v1/{user_id}/orders/{order_id}/pay**
     - *Request*:
       - Headers:
         - `"Authorization": "Bearer <token>"`
-      - Body:
-        ```json
-        {
-          "": "<>"
-        }
-        ```
-    - *Response*:
+    - *Responses*:
+      - Status code 201 (Created)
+        - Body:
+          ```json
+          {
+            "status": "<status>"
+          }
+          ```
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 404 (Not Found)
+      - Status code 500 (Internal Server Error)
 
 - ***Billing-HTTP-GateWay***:
   - **GET /api/v1/{user_id}/balance**
     - *Request*:
       - Headers:
         - `"Authorization": "Bearer <token>"`
-    - *Response*:
+    - *Responses*:
+      - Status code 200 (OK)
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 404 (Not Found)
+      - Status code 500 (Internal Server Error)
   - **POST /api/v1/{user_id}/balance/top-up**
     - *Request*:
       - Headers:
@@ -151,10 +226,22 @@ This is an API description. Source file can be found in `./{service-name}/api` f
       - Body:
         ```json
         {
-          "": "<>"
+          "amount": <amount>
         }
         ```
-    - *Response*:
+    - *Responses*:
+      - Status code 200 (OK)
+        - Body:
+          ```json
+          {
+            "balance": <balance>
+          }
+          ```
+      - Status code 400 (Bad Request)
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 404 (Not Found)
+      - Status code 500 (Internal Server Error)
   - **POST /api/v1/{user_id}/balance/withdraw**
     - *Request*:
       - Headers:
@@ -162,11 +249,22 @@ This is an API description. Source file can be found in `./{service-name}/api` f
       - Body:
         ```json
         {
-          "": "<>"
+          "amount": <amount>
         }
         ```
-    - *Response*:
-
+    - *Responses*:
+      - Status code 200 (OK)
+        - Body:
+          ```json
+          {
+            "balance": <balance>
+          }
+          ```
+      - Status code 400 (Bad Request)
+      - Status code 401 (Unauthorized)
+      - Status code 403 (Forbidden)
+      - Status code 404 (Not Found)
+      - Status code 500 (Internal Server Error)
 
 ### gRPC
 
@@ -374,7 +472,7 @@ This is an API description. Source file can be found in `./{service-name}/api` f
       - Amount: float64
     - *Responses*:
       - Status code 0 (OK)
-        - NewBalance: float64
+        - Balance: float64
       - Status code 1 (CANCELLED)
       - Status code 2 (UNKOWN)
       - Status code 3 (INVALID_ARGUMENT)
@@ -390,7 +488,7 @@ This is an API description. Source file can be found in `./{service-name}/api` f
       - Amount: float64
     - *Responses*:
       - Status code 0 (OK)
-        - NewBalance: float64
+        - Balance: float64
       - Status code 1 (CANCELLED)
       - Status code 2 (UNKOWN)
       - Status code 3 (INVALID_ARGUMENT)

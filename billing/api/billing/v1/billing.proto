@@ -38,8 +38,8 @@ message TopUpAccountRequest {
 }
 
 message TopUpAccountResponse {
-  double new_balance = 1
-    [json_name = "new_balance", (validate.rules).double = {gt: 0}];
+  double balance = 1
+    [json_name = "balance", (validate.rules).double = {gt: 0}];
 }
 
 message WithdrawMoneyRequest {
@@ -49,6 +49,6 @@ message WithdrawMoneyRequest {
 }
 
 message WithdrawMoneyResponse {
-  double new_balance = 1
-    [json_name = "new_balance", (validate.rules).double = {gt: 0}];
+  double balance = 1
+    [json_name = "balance", (validate.rules).double = {gt: 0}];
 }
