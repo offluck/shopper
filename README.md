@@ -8,7 +8,11 @@ P. S. Didn't have time for practical, sorry
 
 ### Schema
 
-![Architecture](https://github.com/offluck/shopper/blob/master/documents/arch.drawio.svg)
+![Architecture](https://github.com/offluck/shopper/blob/master/documents/diagrams/arch.drawio.svg)
+
+### Sequence Diagram
+
+![Sequence](https://github.com/offluck/shopper/blob/master/documents/diagrams/sequence.svg)
 
 ### Description
 
