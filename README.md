@@ -2,6 +2,8 @@
 
 This is the theoretical part of HW3, System Design course
 
+HW-4: I decided to use Saga pattern since it suites microservice architecture quite well. And among 2 solutions I expect to use Orchestration-based one, because with Protocol Buffers it is easier to create event-based systems.
+
 P. S. Didn't have time for practical, sorry
 
 ## Architecture
